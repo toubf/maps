@@ -21,7 +21,7 @@ public class AssociationList<K, V> implements Map<K, V> {
         }
     }
 
-    private ArrayList<Pair<K,V>> pairs;
+    private ArrayList<Pair<K,V>> pairs = new ArrayList<>();
 
     /**
      * Clears the association list, removing all key-value pairs.

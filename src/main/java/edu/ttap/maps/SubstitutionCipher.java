@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 /**
  * A substitution cipher is a simple encryption scheme that associates each
@@ -21,12 +23,15 @@ public class SubstitutionCipher {
     public static Map<Character, Character> createCipher(String filename) throws IOException {
         File file = new File(filename);
         Scanner in = new Scanner(file);
+        System.out.println("file opened");
         Map<Character, Character> cipher = new AssociationList<>();
-        while(in.hasNextLine()){
+        System.out.println("map made");
+        while(in.hasNextLine()) {
             String line = in.nextLine();
             cipher.put(line.charAt(0), line.charAt(2));
+            System.out.println("pair added");
         }
-        
+        in.close();
         return cipher;
     }
 
@@ -74,8 +79,14 @@ public class SubstitutionCipher {
     public static String translate(String s, Map<Character, Character> mapping) {
         int len = s.length();
         char[] ret = new char[len];
-        for (int i = 0; i <= len; i++){
-            ret[i] = mapping.get(s.charAt(i));
+        for (int i = 0; i < len; i++) {
+            char originalChar = s.charAt(i);
+            Character c = mapping.get(originalChar);
+            if (c == null) {
+                ret[i] = originalChar;
+            } else {
+                ret[i] = c;
+            }
         }
         return (new String(ret));
     }
@@ -90,13 +101,19 @@ public class SubstitutionCipher {
                 "Usage: java SubstitutionCipher <encode|decode> <cipherfile> <filename>");
             System.exit(1);
         }
+        System.out.println("input taken");
         Map<Character, Character> cipher = createCipher(args[1]);
+        System.out.println("cipher made");
         if (!isValidCipher(cipher)) {
             System.err.println("Invalid cipher");
         }
+        System.out.println("validity of ci0pher");
         char invert = args[0].charAt(0);
         if (invert == 'd') {
-            Map<Character, Character> invMapping = invertCipher(cipher);
+            cipher = invertCipher(cipher);
         }
+        System.out.println("inversion");
+        String contents = Files.readString(Paths.get(args[2]));        
+        System.out.println(translate(contents, cipher));
     }
 }
