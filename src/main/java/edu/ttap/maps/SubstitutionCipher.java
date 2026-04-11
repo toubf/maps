@@ -23,13 +23,10 @@ public class SubstitutionCipher {
     public static Map<Character, Character> createCipher(String filename) throws IOException {
         File file = new File(filename);
         Scanner in = new Scanner(file);
-        System.out.println("file opened");
         Map<Character, Character> cipher = new AssociationList<>();
-        System.out.println("map made");
         while(in.hasNextLine()) {
             String line = in.nextLine();
             cipher.put(line.charAt(0), line.charAt(2));
-            System.out.println("pair added");
         }
         in.close();
         return cipher;
@@ -101,18 +98,14 @@ public class SubstitutionCipher {
                 "Usage: java SubstitutionCipher <encode|decode> <cipherfile> <filename>");
             System.exit(1);
         }
-        System.out.println("input taken");
         Map<Character, Character> cipher = createCipher(args[1]);
-        System.out.println("cipher made");
         if (!isValidCipher(cipher)) {
             System.err.println("Invalid cipher");
         }
-        System.out.println("validity of ci0pher");
         char invert = args[0].charAt(0);
         if (invert == 'd') {
             cipher = invertCipher(cipher);
         }
-        System.out.println("inversion");
         String contents = Files.readString(Paths.get(args[2]));        
         System.out.println(translate(contents, cipher));
     }
