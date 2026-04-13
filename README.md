@@ -14,6 +14,7 @@ Authors: Ella Tobben, El Houston
 *   https://osera.cs.grinnell.edu/ttap/data-structures-labs/maps.html 
 *   https://docs.oracle.com/javase/8/docs/api/java/lang/Integer.html 
 *   Referenced sounds-of-sorting project by Ella and Emory Cheng because Ella couldn't remember the syntax for throws new Exception();
+*   Asked PM for factoring advice on part three of substitution cipher
 
 ## Texts used in intmaps
 

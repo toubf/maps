@@ -65,52 +65,6 @@ public class IntegerMaps {
         return chars.size();
     }
 
-    private class LetterCounter {
-        ArrayList<Pair<Integer, Integer>> letters; 
-        private LetterCounter() {
-            letters = new ArrayList<>(35); //intl capacity of 35?
-        }
-
-        boolean hasKey(char ch) {
-            try {
-                letters.get(ch);
-            } catch (Exception e) {
-                return false;
-            }
-            return true;
-        }
-        
-        void put(char ch, int v){
-
-        }
-        
-        int get(char ch) {
-            int prefIndex = ((int)ch) % letters.size();
-            if (letters.get(prefIndex).key != null) {
-                if (letters.get(prefIndex).key == (int)ch) {
-                    return letters.get(prefIndex).value;
-                }
-                
-                int index = prefIndex + 1;
-                while (true) {
-                    if (letters.get(index).key == (int)ch) {
-                        return letters.get(index).value;
-                    }
-                    if ((letters.get(index).key == null) || index == prefIndex) { //hit empty slot or wrapped all the way around
-                        throw new IllegalArgumentException();
-                    }
-
-                    if (index >= letters.size() - 1) { //increment & loop around
-                        index = 0;
-                    } else {
-                        index++;
-                    }
-                }
-            } 
-            throw new IllegalArgumentException();
-        }
-    }
-
     public static void main (String[] args) throws FileNotFoundException {
         if (args.length != 1) {
             System.err.println(
