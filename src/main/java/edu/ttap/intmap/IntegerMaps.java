@@ -22,10 +22,11 @@ public class IntegerMaps {
     }
 
     public static void reportCounts (String path) throws FileNotFoundException {
-        List<Integer> letters = new ArrayList<>();
-        for(int i = 0; i < 26; i++) {
-            letters.add(i, 0);
-        }
+        LetterCounter letters = new LetterCounter();
+        //List<Integer> letters = new ArrayList<>();
+        // for(int i = 0; i < 26; i++) {
+        //     letters.put(i, 0);
+        // }
 
         File toRead = new File(path);
         Scanner in = new Scanner(toRead);
@@ -35,7 +36,7 @@ public class IntegerMaps {
             for(int i = 0; i < line.length(); i++) {
                 int c = (int)(line.charAt(i)) - 97;
                 if((c >= 0) && (c < 26)) {
-                    letters.set(c, letters.get(c)+1);
+                    letters.put((char) c, letters.get((char) c)+1);
                 }
             }
         }
@@ -43,7 +44,7 @@ public class IntegerMaps {
 
         for (int i = 0; i < 26; i++){
             char letter = (char) (i + 97);
-            System.out.println(letter + ": " + letters.get(i));
+            System.out.println(letter + ": " + letters.get(letter));
         }
     }
 
@@ -71,7 +72,7 @@ public class IntegerMaps {
                 "Usage: java IntegerMaps <filename>");
             System.exit(1);
         }
-        //reportCounts(args[0]);
-        countChars(args[0]);
+        reportCounts(args[0]);
+        //countChars(args[0]);
     }
 }
