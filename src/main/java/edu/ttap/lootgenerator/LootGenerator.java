@@ -37,7 +37,6 @@ public class LootGenerator {
             String line = tre.nextLine();
             String[] lineArgs = line.split("\t");
             String name = lineArgs[0];
-            System.out.println(name);
             String drop1 = lineArgs[1];
             String drop2 = lineArgs[2];
             String drop3 = lineArgs[3];
@@ -138,9 +137,11 @@ public class LootGenerator {
                     break;
                 }
                 if (ch == 'n') {
+                    in.close();
                     return;
                 }
             }
+            in.close();
         }
     }
 }
