@@ -141,7 +141,6 @@ public class LootGenerator {
                     return;
                 }
             }
-            in.close();
         }
     }
 }
