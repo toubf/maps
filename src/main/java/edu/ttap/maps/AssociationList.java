@@ -12,16 +12,24 @@ import java.util.List;
  */
 public class AssociationList<K, V> implements Map<K, V> {
 
+    /** A key-value pair in the association list. */
     public class Pair<K, V> {
         public K key;
+
         public V value;
+
+        /**
+         * Constructor for a key-value pair.
+         * @param key
+         * @param value
+         */
         public Pair(K key, V value) {
             this.key = key;
             this.value = value;
         }
     }
 
-    private ArrayList<Pair<K,V>> pairs = new ArrayList<>();
+    private ArrayList<Pair<K, V>> pairs = new ArrayList<>();
 
     /**
      * Clears the association list, removing all key-value pairs.
@@ -118,7 +126,7 @@ public class AssociationList<K, V> implements Map<K, V> {
     @Override
     public V put(K key, V value) {
         V oldVal = null;
-        if(containsKey(key)) {
+        if (containsKey(key)) {
             for (int i = 0; i < pairs.size(); i++) {
                 if ((pairs.get(i).key).equals(key)) {
                     oldVal = pairs.get(i).value;
@@ -127,7 +135,7 @@ public class AssociationList<K, V> implements Map<K, V> {
                 }
             }
         } else {
-            pairs.add(new Pair<K,V> (key, value));
+            pairs.add(new Pair<K, V>(key, value));
         }
         return oldVal;
     }
@@ -140,7 +148,7 @@ public class AssociationList<K, V> implements Map<K, V> {
      */
     @Override
     public void putAll(Map<? extends K, ? extends V> m) {
-        for(K k : m.keySet()) {
+        for (K k : m.keySet()) {
             this.put(k, m.get(k));
         }
     }

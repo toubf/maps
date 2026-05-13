@@ -2,7 +2,6 @@ package edu.ttap.maps;
 
 import java.util.Map;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 import java.nio.file.Files;
@@ -24,7 +23,7 @@ public class SubstitutionCipher {
         File file = new File(filename);
         Scanner in = new Scanner(file);
         Map<Character, Character> cipher = new AssociationList<>();
-        while(in.hasNextLine()) {
+        while (in.hasNextLine()) {
             String line = in.nextLine();
             cipher.put(line.charAt(0), line.charAt(2));
         }
@@ -41,11 +40,12 @@ public class SubstitutionCipher {
      * @return true iff the given mapping is a valid substitution cipher
      */
     public static boolean isValidCipher(Map<Character, Character> cipher) {
-        if (cipher.size() != 26)
+        if (cipher.size() != 26) {
             return false;
-        for(int i = 97; i < 123; i++) { //lowercase a-z hopefully
+        }
+        for (int i = 97; i < 123; i++) { //lowercase a-z hopefully
             char ch = (char) i;
-            if ((!cipher.containsValue(ch)) || (!cipher.containsKey(ch))){
+            if ((!cipher.containsValue(ch)) || (!cipher.containsKey(ch))) {
                 return false;
             }
         }
@@ -61,7 +61,7 @@ public class SubstitutionCipher {
      */
     public static Map<Character, Character> invertCipher(Map<Character, Character> cipher) {
         Map<Character, Character> newCipher = new AssociationList<>();
-        for(char k : cipher.keySet()) {
+        for (char k : cipher.keySet()) {
             newCipher.put(cipher.get(k), k);
         }
         return newCipher;
